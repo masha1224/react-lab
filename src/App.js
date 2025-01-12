@@ -4,16 +4,22 @@ import {useState} from "react";
 import "milligram";
 function App() {
     const [title, setTitle] = useState('Wall-E');
+    const [movies, setMovies] = useState([]);
+    const [year, setYear] = useState('2023'); // Dodanie roku
 
-    const movies = [
-        {title: "Wall-E"},
-        {title: "Pulp Fiction"},
-        {title: "Matrix"},
-        {title: "1670"},
-    ];
+    function handleYearChange(event) {
+        setYear(event.target.value);
+    }
 
-    function handleChange(event) {
+    function handleTitleChange(event) {
         setTitle(event.target.value);
+    }
+
+    function addMovie() {
+        const newMovie = { title, year };
+        setMovies([...movies, newMovie]); // Dodaj nowy film do listy
+        setTitle(''); // Wyczyść pole tytułu
+        setYear(''); // Wyczyść pole roku
     }
 
     let message;
@@ -30,18 +36,24 @@ function App() {
             <h1>My favourite movies to watch</h1>
             <h2>Titles</h2>
             <ul>
-                {movies.map((movie) => <li key={movie.title}>{movie.title}</li>)}
+                {movies.map((movie, index) => (<li key={index}>{movie.title} ({movie.year})</li>))}
             </ul>
-            <h3>My favourite movie for today is {title}</h3>
-            <input type="text" value={title} onChange={handleChange}/>
-            {/* Dodanie przycisku */}
-            <button type="button" onClick={() => alert(title)}>
-                Pokaż tytuł filmu
-            </button>
+            <h3>Add Movie</h3>
+            <h4>Title</h4>
+            <input type="text" value={title} onChange={handleTitleChange}/>
             {/* Wyświetlanie wiadomości, jeśli tytuł nie jest pusty */}
-            {title.length > 0 && <div>{message}</div>}
+            {
+                title.length > 0 && <div>{message}</div>
+            }
+            <h5>Year</h5>
+            <input type="text" value={year} onChange={handleYearChange}/>
+            {/* Dodanie przycisku */}
+            <button type="button" onClick={addMovie}>
+                Add
+            </button>
         </div>
-    );
+    )
+        ;
 }
 
 export default App;
