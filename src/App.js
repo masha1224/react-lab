@@ -4,6 +4,13 @@ import {useState} from "react";
 function App() {
     const [title, setTitle] = useState('Wall-E');
 
+    const movies = [
+        {title: "Wall-E"},
+        {title: "Pulp Fiction"},
+        {title: "Matrix"},
+        {title: "1670"},
+    ];
+
     function handleChange(event) {
         setTitle(event.target.value);
     }
@@ -20,7 +27,11 @@ function App() {
     return (
         <div>
             <h1>My favourite movies to watch</h1>
-            <h2>My favourite movie for today is {title}</h2>
+            <h2>Titles</h2>
+            <ul>
+                {movies.map((movie) => <li key={movie.title}>{movie.title}</li>)}
+            </ul>
+            <h3>My favourite movie for today is {title}</h3>
             <input type="text" value={title} onChange={handleChange}/>
             {/* Dodanie przycisku */}
             <button type="button" onClick={() => alert(title)}>
