@@ -22,6 +22,10 @@ function App() {
             <h1>My favourite movies to watch</h1>
             <h2>My favourite movie for today is {title}</h2>
             <input type="text" value={title} onChange={handleChange}/>
+            {/* Dodanie przycisku */}
+            <button type="button" onClick={() => alert(title)}>
+                Pokaż tytuł filmu
+            </button>
             {/* Wyświetlanie wiadomości, jeśli tytuł nie jest pusty */}
             {title.length > 0 && <div>{message}</div>}
         </div>
